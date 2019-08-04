@@ -35,6 +35,7 @@ export class Field extends React.Component<Props, State> {
                cellNumber={index}
                key={index}
                handleCellSelect={this.handleCellSelect}
+               serial={this.props.serial}
              />
     });
   }

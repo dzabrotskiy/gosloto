@@ -43,10 +43,11 @@ export const App: React.FC<Props> = (props: Props) => {
     };
     props.clearState();
     props.addAllNumbers(data);
-    console.log('randomArray:', randomArray);
-    console.log('randomOneOrTwo: ', randomOneOrTwo);
-    // const isWin = containsMoreThanFour(randomArray) && getOneOrTwo() === getOneOrTwo();
-    // setWinState(isWin);
+    document.getElementById(`field2-${randomOneOrTwo}`).classList.add('active');
+    for (const x of randomArray) {
+      const cell: HTMLElement = document.getElementById(`field1-${x}`);
+      cell.classList.add('active');
+    }
   };
 
   const isShowResultBtnDisabled: boolean = props.selectedNumbers['2'].length === 0 ||

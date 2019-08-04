@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 interface Props {
   cellNumber: number;
   handleCellSelect?: (index: number) => void;
+  serial: number;
 }
 
 export const Cell: React.FC<Props> = (props: Props) => {
@@ -16,6 +17,7 @@ export const Cell: React.FC<Props> = (props: Props) => {
             <CellItem
               isSelect={isSelected}
               onClick={handleClick}
+              id={`field${props.serial}-${props.cellNumber}`}
             >
               {props.cellNumber}
             </CellItem>
@@ -47,4 +49,9 @@ const CellItem = styled.button`
     height: ${p.isSelect ? '34px' : '40px'};
     background: ${p.isSelect ? '#ffd205' : 'transparent'};
   `}
+  &.active {
+    width: 34px;
+    height: 34px;
+    background: #ffd205;
+  }
 `;
