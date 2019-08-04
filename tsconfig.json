@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+      "plugins": [
+        {
+          "name": "typescript-styled-plugin",
+          "tags": [
+            "(styled.div)",
+            "styled",
+            "css",
+            "sty"
+          ]
+        }
+      ],
+      "allowJs": true,
+      "target": "es5",
+      "module": "commonjs",
+      "declaration": false,
+      "allowSyntheticDefaultImports": true,
+      "noImplicitAny": false,
+      "removeComments": false,
+      "isolatedModules": false,
+      "experimentalDecorators": true,
+      "moduleResolution": "node",
+      "noLib": false,
+      "jsx": "react",
+      "sourceMap": false,
+      "outDir": "./dist",
+      "rootDir": "./",
+      "baseUrl": "./",
+      "lib": [
+        "dom",
+        "esnext"
+      ]
+    },
+    "include": [
+      "./**/*.ts",
+      "./**/*.tsx"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/__deprecated/**"
+    ],
+    "compileOnSave": true
+  }

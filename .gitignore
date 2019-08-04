@@ -1,0 +1,6 @@
+# зависимости
+/node_modules
+# прод сборка
+/build
+# разное
+npm-debug.log*
