@@ -5,7 +5,7 @@ import { getOneOrTwo, containsMoreThanFour, generateRandomNumbers } from '../../
 import * as re from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { clearState } from '../../actions';
+import { clearState, addAllNumbers } from '../../actions';
 
 const magicWandImage = require('../../static/magic-wand.svg');
 
@@ -15,13 +15,17 @@ interface Props {
     ['2']: Array<number>
   };
   clearState: () => void;
+  addAllNumbers: (data) => void;
 }
 
 export const App: React.FC<Props> = (props: Props) => {
   const [isWon, setWinState] = React.useState<boolean>(undefined);
   const showResults = () => {
-    const isWin: boolean = containsMoreThanFour(props.selectedNumbers['1'])
-                           && getOneOrTwo() === props.selectedNumbers['2'][0];
+    const isSecondFieldWin: boolean = getOneOrTwo() === props.selectedNumbers['2'][0];
+    let isWin: boolean = false;
+    if (isSecondFieldWin && containsMoreThanFour(props.selectedNumbers['1'])) {
+      isWin = true;
+    }
     setWinState(isWin);
   };
 
@@ -32,12 +36,21 @@ export const App: React.FC<Props> = (props: Props) => {
 
   const handleMagicWandClick = () => {
     const randomArray = generateRandomNumbers();
-    const isWin = containsMoreThanFour(randomArray) && getOneOrTwo() === getOneOrTwo();
-    console.log('isWin mw: ', isWin);
-    setWinState(isWin);
+    const randomOneOrTwo = getOneOrTwo();
+    const data = {
+      '1': randomArray,
+      '2': randomOneOrTwo
+    };
+    props.clearState();
+    props.addAllNumbers(data);
+    console.log('randomArray:', randomArray);
+    console.log('randomOneOrTwo: ', randomOneOrTwo);
+    // const isWin = containsMoreThanFour(randomArray) && getOneOrTwo() === getOneOrTwo();
+    // setWinState(isWin);
   };
 
-  const isShowResultBtnDisabled: boolean = props.selectedNumbers['2'].length === 0 || props.selectedNumbers['1'].length < 8;
+  const isShowResultBtnDisabled: boolean = props.selectedNumbers['2'].length === 0 ||
+                                           props.selectedNumbers['1'].length < 8;
 
   const renderCard = () => {
     if (isWon == undefined) {
@@ -49,7 +62,12 @@ export const App: React.FC<Props> = (props: Props) => {
           </Header>
           <FieldContainer serial={1} cellQuantity={19} />
           <FieldContainer serial={2} cellQuantity={2} />
-          <ShowResultButton onClick={showResults} disabled={isShowResultBtnDisabled}>Показать результат</ShowResultButton>
+          <ShowResultButton
+            onClick={showResults}
+            disabled={isShowResultBtnDisabled}
+          >
+            Показать результат
+          </ShowResultButton>
         </React.Fragment>
       );
     } else {
@@ -64,7 +82,6 @@ export const App: React.FC<Props> = (props: Props) => {
       )
     }
   }
-
   return (
     <Container>
       <Card>
@@ -80,7 +97,8 @@ export const AppContainer = re.compose(
       selectedNumbers: state.selectedNumbers,
     }),
     dispatch => ({
-      clearState: bindActionCreators(clearState, dispatch)
+      clearState: bindActionCreators(clearState, dispatch),
+      addAllNumbers: bindActionCreators(addAllNumbers, dispatch)
     }),
   )
 )(App);

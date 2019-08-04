@@ -1,7 +1,14 @@
 export const generateRandomNumbers = (): Array<number> => {
-    return Array.from(Array(8), () => {
-        return Math.floor(Math.random() * 19 + 1);
-    });
+    const result: Array<number> = [];
+    for (let i = 0; i < 8; i++) {
+      const temp = Math.floor(Math.random() * 19 + 1);
+      if (!result.includes(temp)) {
+          result.push(temp);
+      } else {
+          i--;
+      }
+    }
+    return result;
 };
 
 export const getOneOrTwo = (): number => {

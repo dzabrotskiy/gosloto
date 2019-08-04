@@ -12,6 +12,11 @@ const mainReducer = (state: State = initialState, action): State => {
                 [...state.selectedNumbers[field], number] : [...state.selectedNumbers[field]]
         }
       };
+    case 'ADD_ALL_NUMBERS':
+        return {
+            ...state,
+            selectedNumbers: {...action.data}
+        }
     case 'CLEAR':
         return {
             ...initialState

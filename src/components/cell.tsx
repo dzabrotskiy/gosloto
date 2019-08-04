@@ -15,7 +15,8 @@ export const Cell: React.FC<Props> = (props: Props) => {
   return <CellContainer>
             <CellItem
               isSelect={isSelected}
-              onClick={handleClick}>
+              onClick={handleClick}
+            >
               {props.cellNumber}
             </CellItem>
          </CellContainer>

@@ -32,9 +32,10 @@ export class Field extends React.Component<Props, State> {
     this.cells = Array.from(Array(this.props.cellQuantity), () => {
       index++;
       return <Cell
-              cellNumber={index}
-              key={index}
-              handleCellSelect={this.handleCellSelect} />
+               cellNumber={index}
+               key={index}
+               handleCellSelect={this.handleCellSelect}
+             />
     });
   }
 
@@ -43,7 +44,8 @@ export class Field extends React.Component<Props, State> {
       this.props.addSelectedNumber(index, this.props.serial);
     }
     this.setState(prevstate => ({
-      remainingCells: prevstate.selectedCells.has(index) ? prevstate.remainingCells : prevstate.remainingCells - 1,
+      remainingCells: prevstate.selectedCells.has(index) ?
+                      prevstate.remainingCells : prevstate.remainingCells - 1,
       selectedCells: prevstate.selectedCells.add(index),
     }));
   };
