@@ -40,6 +40,12 @@ export class Field extends React.Component<Props, State> {
     });
   }
 
+  componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>): void {
+    if (prevProps.selectedNumbers['1'].length === 0 && this.props.selectedNumbers['1'].length === 8) {
+      this.setState({ remainingCells: 0 })
+    }
+  }
+
   private handleCellSelect = (index: number): void => {
     if (!this.state.selectedCells.has(index)) {
       this.props.addSelectedNumber(index, this.props.serial);

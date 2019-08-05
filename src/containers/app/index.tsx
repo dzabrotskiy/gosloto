@@ -35,6 +35,10 @@ export const App: React.FC<Props> = (props: Props) => {
   };
 
   const handleMagicWandClick = () => {
+    if (props.selectedNumbers['1'].length > 0 || props.selectedNumbers['2'].length === 1) {
+      alert('Вы уже выбрали ячейки!');
+      return;
+    }
     const randomArray = generateRandomNumbers();
     const randomOneOrTwo = getOneOrTwo();
     const data = {
@@ -45,8 +49,7 @@ export const App: React.FC<Props> = (props: Props) => {
     props.addAllNumbers(data);
     document.getElementById(`field2-${randomOneOrTwo}`).classList.add('active');
     for (const x of randomArray) {
-      const cell: HTMLElement = document.getElementById(`field1-${x}`);
-      cell.classList.add('active');
+      document.getElementById(`field1-${x}`).classList.add('active');
     }
   };
 

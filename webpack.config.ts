@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const tsImportPlugin = require("ts-import-plugin");
 
 const PORT = process.env.PORT || 3000;
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -48,9 +47,7 @@ module.exports = {
         react: path.resolve("./node_modules/react"),
         "react-dom": path.resolve("./node_modules/react-dom"),
         "styled-components": path.resolve("./node_modules/styled-components"),
-        axios: path.resolve("./node_modules/axios"),
         "babel-polyfill": path.resolve("./node_modules/babel-polyfill"),
-        lodash: path.resolve("./node_modules/lodash"),
     },
     modules: ["node_modules", "node-modules", __dirname],
     extensions: [".webpack.js", ".web.js", ".ts", ".js", ".tsx"]
@@ -76,15 +73,7 @@ module.exports = {
                 options: {
                     transpileOnly: true,
                     getCustomTransformers: () => ({
-                        before: [
-                            tsImportPlugin([
-                                {
-                                    libraryName: "antd",
-                                    libraryDirectory: "es",
-                                    style: true,
-                                }
-                            ])
-                        ].concat(isDevelopment ? styledComponentsTransformer : []),
+                        before: [].concat(isDevelopment ? styledComponentsTransformer : []),
                     }),
                     configFile: path.join(DIR_ROOT, "tsconfig.json"),
                     compilerOptions: {
@@ -102,13 +91,13 @@ module.exports = {
         test: /\.less$/,
         use: [
             {
-                loader: "style-loader" // creates style nodes from JS strings
+                loader: "style-loader"
             },
             {
-                loader: "css-loader" // translates CSS into CommonJS
+                loader: "css-loader"
             },
             {
-                loader: "less-loader", // compiles Less to CSS
+                loader: "less-loader",
                 options: {
                     javascriptEnabled: true,
                 }
