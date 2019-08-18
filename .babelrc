@@ -1,18 +1,13 @@
 {
-    "presets": [
-      "env",
-      "react",
-      "stage-0"
-    ],
-    "plugins": [
-      ["import", {
-        "libraryName": "antd",
-        "style": true,
-      }],
-      "transform-class-properties",
-      "transform-decorators",
-      "transform-react-constant-elements",
-      "transform-react-inline-elements",
-      "styled-components"
-    ]
+  "presets": [
+    "env",
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-decorators",
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
+  ]
 }

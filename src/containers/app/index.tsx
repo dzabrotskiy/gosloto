@@ -1,7 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { FieldContainer } from '../field';
-import { getOneOrTwo, containsMoreThanFour, generateRandomNumbers } from '../../utils';
+import { 
+  getOneOrTwo, 
+  containsMoreThanFour, 
+  generateRandomNumbers,
+  getWinState } from '../../utils';
 import * as re from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,12 +25,7 @@ interface Props {
 export const App: React.FC<Props> = (props: Props) => {
   const [isWon, setWinState] = React.useState<boolean>(undefined);
   const showResults = () => {
-    const isSecondFieldWin: boolean = getOneOrTwo() === props.selectedNumbers['2'][0];
-    let isWin: boolean = false;
-    if (isSecondFieldWin && containsMoreThanFour(props.selectedNumbers['1'])) {
-      isWin = true;
-    }
-    setWinState(isWin);
+    setWinState(getWinState(props.selectedNumbers));
   };
 
   const playAgain = () => {
@@ -47,9 +46,9 @@ export const App: React.FC<Props> = (props: Props) => {
     };
     props.clearState();
     props.addAllNumbers(data);
-    document.getElementById(`field2-${randomOneOrTwo}`).classList.add('active');
+    document.querySelector(`#field2-${randomOneOrTwo}`).classList.add('active');
     for (const x of randomArray) {
-      document.getElementById(`field1-${x}`).classList.add('active');
+      document.querySelector(`#field1-${x}`).classList.add('active');
     }
   };
 

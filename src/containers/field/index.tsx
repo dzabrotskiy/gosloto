@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import * as re from 'recompose';
 import { bindActionCreators } from 'redux';
 import { addSelectedNumber } from '../../actions';
+import { SelectedNumbersI } from '../../types';
 
 interface Props {
   serial: number;
   cellQuantity: number;
-  selectedNumbers: any;
+  selectedNumbers: SelectedNumbersI;
   addSelectedNumber: (index: number, serial: number) => void;
 };
 

@@ -1,11 +1,13 @@
 import { createStore, compose } from 'redux';
 import { rootReducer } from './reducers';
+import { SelectedNumbersI } from './types';
 
 export interface State {
-  selectedNumbers: {
-    ['1']: Array<number>,
-    ['2']: Array<number>
-  },
+  // selectedNumbers: {
+  //   ['1']: Array<number>,
+  //   ['2']: Array<number>
+  // },
+  selectedNumbers: SelectedNumbersI;
 };
 
 const composeEnhancers =

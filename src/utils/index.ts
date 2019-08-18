@@ -1,3 +1,5 @@
+import { SelectedNumbersI } from '../types';
+
 export const generateRandomNumbers = (): Array<number> => {
     const result: Array<number> = [];
     for (let i = 0; i < 8; i++) {
@@ -24,4 +26,14 @@ export const containsMoreThanFour = (array: Array<number>): boolean => {
         }
     }
     return count >= 4;
+};
+
+export const getWinState = (data: SelectedNumbersI): boolean => {
+    const isSecondFieldWin: boolean = data['2'][0] === getOneOrTwo();
+    if (isSecondFieldWin) {
+        if (containsMoreThanFour(data['1'])) {
+            return true;
+        }
+    }
+    return false;
 };

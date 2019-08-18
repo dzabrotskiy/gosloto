@@ -1,5 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import { SelectedNumbersI } from '../types';
+const { useEffect } = React;
 
 interface Props {
   cellNumber: number;
@@ -8,18 +10,22 @@ interface Props {
 }
 
 export const Cell: React.FC<Props> = (props: Props) => {
+  const { serial, cellNumber } = props;
   const [isSelected, setSelectState] = React.useState(false);
+  useEffect(() => {
+    
+  }, []);
   const handleClick = () => {
     setSelectState(true);
-    props.handleCellSelect(props.cellNumber);
+    props.handleCellSelect(cellNumber);
   };
   return <CellContainer>
             <CellItem
               isSelect={isSelected}
               onClick={handleClick}
-              id={`field${props.serial}-${props.cellNumber}`}
+              id={`field${serial}-${cellNumber}`}
             >
-              {props.cellNumber}
+              {cellNumber}
             </CellItem>
          </CellContainer>
 };
